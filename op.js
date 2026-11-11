@@ -12,7 +12,7 @@ function renderOnePager(c){
     .filter(([,v]) => v).map(([k,v]) => `--${k}:${v}`).join(";");
   const price = priceShown(c)
     ? `<div class="op-price"><span class="m">стоимость участия</span><b>${esc(c.price.value)} <i>₽</i></b></div>`
-    : `<a class="op-price tbd" href="${url}"><span class="m">стоимость участия</span><b>по запросу</b><span class="op-qr">${opQR(url)}</span></a>`;
+    : `<div class="op-price tbd"><span class="m">стоимость участия</span><b>по запросу</b></div>`;
   const year = D(c.end).getUTCFullYear();
   return `
   <div class="op" style="${style}">
@@ -29,12 +29,12 @@ function renderOnePager(c){
       <div class="op-ctx"><span class="m">контекст</span><p>${esc(o.context)}</p></div>
     </div>
     <div class="abs op-ip">
-      <div class="op-col op-c1"><span class="m">идея</span><h4>${esc(o.idea.h)}</h4><p>${esc(o.idea.text)}</p></div>
+      <div class="op-col op-c1"><span class="m">${esc(o.idea.label || "идея")}</span><h4>${esc(o.idea.h)}</h4><p>${esc(o.idea.text)}</p></div>
       <i class="op-vr"></i>
-      <div class="op-col op-c2"><span class="m">промо</span><h4>${esc(o.promo.h)}</h4><p>${esc(o.promo.text)}</p></div>
+      <div class="op-col op-c2"><span class="m">${esc(o.promo.label || "промо")}</span><h4>${esc(o.promo.h)}</h4><p>${esc(o.promo.text)}</p></div>
     </div>
-    <div class="abs op-gets"><span class="m">что получает партнёр</span>
-      <ul>${o.gets.slice(0,4).map((g,i) => `<li><span>0${i+1}</span>${esc(g)}</li>`).join("")}</ul>
+    <div class="abs op-gets ${o.gets.length > 4 ? "many" : ""}"><span class="m">что получает партнёр</span>
+      <ul>${o.gets.slice(0,6).map((g,i) => `<li><span>0${i+1}</span>${esc(g)}</li>`).join("")}</ul>
     </div>
     <div class="abs op-steps" style="--n:${o.steps.length}">
       <div class="op-steps-h"><span class="m">как идёт проект</span><i></i><img src="img/wordmark_dark.png" alt="makelove"></div>

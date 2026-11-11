@@ -112,7 +112,7 @@ function render(){
   const prev = COLLABS[(i - 1 + COLLABS.length) % COLLABS.length], next = COLLABS[(i + 1) % COLLABS.length];
   document.title = `${qt(c)} — makelove × вы`;
   document.body.style.setProperty("--kacc", c.acc);
-  const pdf = PDF_READY.includes(c.id) ? `pdf/${c.id}.pdf` : null;
+  const pdf = c.op ? `pdf/${c.id}.pdf` : null;
   const P = c.page;
   const keyLine = c.keyNote ? `${c.keyNote}` : (c.keys && c.keys.length ? "отмечены в календаре" : "—");
 
@@ -131,7 +131,7 @@ function render(){
       <div><h1 class="k-title">${esc(qt(c))}</h1><p class="k-sub" style="margin-top:14px">${esc(c.sub)}</p></div>
       <div class="k-row">
         <div class="facts">
-          <div><span class="mono">период</span><b>${period(c)} ${YEAR}</b></div>
+          <div><span class="mono">период</span><b>${periodFull(c)}</b></div>
           <div><span class="mono">формат</span><b>${esc(c.format)}</b></div>
           <div><span class="mono">ключевые даты</span><b>${esc(keyLine)}</b></div>
           <div><span class="mono">стоимость</span><b>${priceShown(c) ? esc(c.price.value) + " ₽" : "по запросу"}</b></div>

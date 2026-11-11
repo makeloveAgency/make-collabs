@@ -49,8 +49,9 @@
 .op-ip .op-vr{left:508px;top:0;height:258px}
 
 /* ценность */
-.op-gets{left:848px;top:605px;width:1008px;height:232px;border-radius:24px;background:var(--box);padding:31px 28px}
+.op-gets{left:848px;top:605px;width:1008px;min-height:232px;border-radius:24px;background:var(--box);padding:31px 28px}
 .op-gets ul{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;column-gap:36px;row-gap:22px;margin-top:18px}
+.op-gets.many ul{row-gap:14px}
 .op-gets li{display:grid;grid-template-columns:44px 1fr;font-size:23px;line-height:1.2}
 .op-gets li span{font-family:"Fira Mono",monospace;font-weight:500;font-size:22px;color:var(--lab);padding-top:2px}
 
