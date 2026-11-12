@@ -20,7 +20,7 @@ html,body{margin:0;background:#fff}
 <script src="op.js"></script>
 <script>
 /* onepager.html#blin — чистый лист 1920×1080 для выгрузки в PDF */
-const c = COLLABS.find(x => x.id === location.hash.slice(1) && x.op) || COLLABS.find(x => x.op);
+const c = OPEN.find(x => x.id === location.hash.slice(1) && x.op) || OPEN.find(x => x.op);
 document.title = `${qt(c)} — onepager`;
 $("#sheet").innerHTML = renderOnePager(c);
 </script>

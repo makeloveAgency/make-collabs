@@ -108,8 +108,8 @@
 const PDF_READY = ["utrennik","blin"];                       // для каких коллаб уже выгружен pdf/<id>.pdf
 function render(){
   const id = location.hash.slice(1);
-  const i = Math.max(0, COLLABS.findIndex(x => x.id === id)), c = COLLABS[i];
-  const prev = COLLABS[(i - 1 + COLLABS.length) % COLLABS.length], next = COLLABS[(i + 1) % COLLABS.length];
+  const i = Math.max(0, OPEN.findIndex(x => x.id === id)), c = OPEN[i];
+  const prev = OPEN[(i - 1 + OPEN.length) % OPEN.length], next = OPEN[(i + 1) % OPEN.length];
   document.title = `${qt(c)} — makelove × вы`;
   document.body.style.setProperty("--kacc", c.acc);
   const pdf = c.op ? `pdf/${c.id}.pdf` : null;

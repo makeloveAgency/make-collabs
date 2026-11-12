@@ -230,3 +230,11 @@ footer .mono{color:rgba(255,255,255,.6)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
 .lc-fmt{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--faint)}
+
+/* закрытая коллаба (locked): видна, но размыта и некликабельна */
+.locked{pointer-events:none;cursor:default}
+.lc.locked{position:relative}
+.lc.locked .lc-ph,.lc.locked .lc-pn>*{filter:blur(7px);opacity:.75;user-select:none}
+.lc.locked .lock-note{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--card-bg,#fff);white-space:nowrap}
+.mt-c.locked span,.it.locked .lb{filter:blur(4px);opacity:.7}
+.it.locked .bar{opacity:.45}

@@ -133,7 +133,7 @@ $("#list").innerHTML = COLLABS.map(c => {
     ? `<div class="lc-ph"><img src="${c.img}" alt="" loading="lazy"></div>`
     : `<div class="lc-ph empty" style="--acc:${c.acc};--acc-bg:color-mix(in srgb, ${c.acc} 24%, var(--surface))"><div class="hm" aria-hidden="true"></div><span>фото скоро</span></div>`;
   return `
-  <a class="lc" href="${pageUrl(c)}" data-c="${c.id}" data-open="${c.id}">
+  <a class="lc${c.locked ? " locked" : ""}" ${c.locked ? 'aria-disabled="true" tabindex="-1"' : `href="${pageUrl(c)}"`} data-c="${c.id}" data-open="${c.id}">${c.locked ? '<span class="lock-note">скоро анонсируем</span>' : ""}
     ${ph}
     <div class="lc-pn">
       <span class="pill ${c.status==="draft"?"draft":""}">${c.status==="draft" ? "в разработке · " : ""}${monthsLabel(c)}</span>
@@ -166,7 +166,7 @@ $("#year").innerHTML = MONTHS.map((name, m) => {
   const head = `<div class="mt-h"><b>${name}</b><span>${String(m+1).padStart(2,"0")}</span></div><div class="mg" aria-hidden="true">${g}</div>`;
   if (!cs.length) return `<article class="mt free">${head}<a class="mt-free" href="#zayavka" data-free>месяц свободен · предложить идею →</a></article>`;
   return `<article class="mt" data-c="${cs.map(c=>c.id).join(" ")}">${head}<div class="mt-cs">${cs.map(c =>
-    `<a class="mt-c" href="${pageUrl(c)}" data-open="${c.id}" data-c="${c.id}"><span>${esc(qt(c))}<small>${period(c)}</small></span><i aria-hidden="true">→</i></a>`).join("")}</div></article>`;
+    `<a class="mt-c${c.locked ? " locked" : ""}" ${c.locked ? 'aria-disabled="true"' : `href="${pageUrl(c)}"`} data-open="${c.id}" data-c="${c.id}"><span>${esc(qt(c))}<small>${period(c)}</small></span><i aria-hidden="true">→</i></a>`).join("")}</div></article>`;
 }).join("");
 
 /* calendar v2/v3 — year ribbon, auto lanes so labels never overlap */
@@ -189,7 +189,7 @@ tl.innerHTML =
         const kl = (a - c.a) / len * 100, kw = (b - a + 1) / len * 100;
         return a === b ? `<i class="kd" style="left:calc(${kl + kw/2}% - 1.5px)"></i>` : `<i class="kr" style="left:${kl}%;width:${kw}%"></i>`;
       }).join("");
-      return `<a class="it ${c.status==="draft"?"draft":""} ${L + W > 86 ? "end" : ""}" href="${pageUrl(c)}" data-open="${c.id}" data-c="${c.id}" style="--l:${L}%;--w:${W}%;--acc:${c.acc}">
+      return `<a class="it ${c.status==="draft"?"draft":""} ${c.locked?"locked":""} ${L + W > 86 ? "end" : ""}" ${c.locked ? 'aria-disabled="true"' : `href="${pageUrl(c)}"`} data-open="${c.id}" data-c="${c.id}" style="--l:${L}%;--w:${W}%;--acc:${c.acc}">
         <div class="bar" style="--wpx:100%;width:calc(${W} / ${Math.max(W,0.0001)} * 100%)">${marks}</div>
         <div class="lb"><b>${esc(qt(c))}</b><small>${period(c)}${c.keyNote ? " · " + c.keyNote : ""}</small></div></a>`;
     }).join("")}</div>`).join("")}</div>`;
@@ -217,7 +217,7 @@ $$("[data-free]").forEach(el => el.addEventListener("click", () => { selItem.val
 
 /* form */
 const selItem = $("#f-item");
-selItem.innerHTML = `<option value="">пока не выбрали</option>` + COLLABS.map(c => `<option value="${c.id}">${monthsLabel(c)} — ${esc(qt(c))}</option>`).join("") + `<option value="free">своя идея на свободный месяц</option>`;
+selItem.innerHTML = `<option value="">пока не выбрали</option>` + OPEN.map(c => `<option value="${c.id}">${monthsLabel(c)} — ${esc(qt(c))}</option>`).join("") + `<option value="free">своя идея на свободный месяц</option>`;
 function toast(t){ const el = $("#toast"); el.textContent = t; el.classList.add("show"); clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove("show"), 2400); }
 $("#form").addEventListener("submit", async e => {
   e.preventDefault();
@@ -243,7 +243,7 @@ $("#form").addEventListener("submit", async e => {
 });
 
 /* hero corner — three options to choose from */
-const next = COLLABS.find(c => c.status === "ready") ;
+const next = OPEN.find(c => c.status === "ready") ;
 $("#corner").innerHTML = `<a class="cn-next" href="${pageUrl(next)}">
   <span class="cn-ph">${next.img ? `<img src="${next.img}" alt="">` : ""}</span>
   <span class="cn-tx"><span class="mono">ближайшая коллаборация</span><b>${esc(qt(next))}</b><small>${period(next)} ${YEAR}</small></span>

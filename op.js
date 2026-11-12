@@ -25,7 +25,7 @@ function renderOnePager(c){
       ${price}
     </div>
     <div class="abs op-story">
-      <div class="op-ph"><img src="${o.photo || c.img}" alt=""></div>
+      <div class="op-ph"><img src="${o.photo || c.img}" alt="" onerror="this.remove()"></div>
       <div class="op-ctx${o.context.length > 200 ? " long" : ""}"><span class="m">контекст</span><p>${esc(o.context)}</p></div>
     </div>
     <div class="abs op-ip">

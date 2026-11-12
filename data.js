@@ -2,7 +2,7 @@
    КОНТЕНТ — единый источник для главной, календаря, страниц коллаб и onepager.
    start / end — период активации (ГГГГ-ММ-ДД).
    keys — ключевые даты: "2027-03-08" или диапазон ["2027-03-08","2027-03-14"].
-   status: "ready" | "draft".   price.show выключается глобально через SHOW_PRICES.
+   status: "ready" | "draft".   locked:true — анонс без деталей (блюр, без ссылок).   price.show выключается глобально через SHOW_PRICES.
    op — слоты onepager (жёсткие лимиты, см. комментарии), page — лонгрид (свободно).
    theme — цвета onepager: lab (подписи), acc (акцент ₽/номера), box (плашка), glow (свечение фона).
    ============================================================ */
@@ -113,7 +113,7 @@ const COLLABS = [
 
   { id:"otpusk", title:"отпуск наоборот", sub:"летняя вахта как тур",
     start:"2027-05-12", end:"2027-05-31", keys:[], acc:"#4FB35E", img:"img/otpusk.jpg",
-    format:"спецпроект", status:"ready", hidden:true, price:null,
+    format:"спецпроект", status:"ready", locked:true, price:null,
     short:"маскируем летнюю вахту под туры: показываем вахтовую работу так, как обычно продают отпуск." },
 
   { id:"molodec", title:"ты молодец", sub:"похвала — рост производительности",
@@ -148,7 +148,7 @@ const COLLABS = [
     short:"концепция в разработке. оставьте заявку — пришлём подробности, как только идея будет готова." },
 
   { id:"oldschool", title:"кодинг старой школы", sub:"нам нужны хард-скиллы",
-    start:"2027-09-01", end:"2027-09-13", keys:["2027-09-13"], keyNote:"день программиста", acc:"#D8B341", img:"img/oldschool.jpg",
+    start:"2027-09-01", end:"2027-09-13", keys:["2027-09-13"], keyNote:"день программиста", acc:"#D8B341", img:null,   // фото: img/oldschool.jpg — вернуть, когда файл будет в репозитории
     format:"коллекция кейкапов", status:"ready", price:{value:"1 100 000"},
     short:"коллекция ювелирных кейкапов в духе хип-хоп гриллз — для кодеров старой школы с настоящими хард-скиллами.",
     theme:{ lab:"#147B49", acc:"#5FD38E", box:"#DDF2E2", glow:"#E6FFF0", line:"#B8CCC2" },
@@ -193,7 +193,7 @@ const monthDays = m => new Date(Date.UTC(YEAR, m+1, 0)).getUTCDate();
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 const qt = c => `«${c.title}»`;                       // как название пишется на сайте
 
-for (let i = COLLABS.length - 1; i >= 0; i--) if (COLLABS[i].hidden) COLLABS.splice(i, 1);   // hidden:true — не публикуем
+const OPEN = COLLABS.filter(c => !c.locked);   // locked:true — карточка видна заблюренной, страница и onepager закрыты
 COLLABS.forEach(c => {
   c.a = Math.max(0, doy(c.start)); c.b = doy(c.end);                       // календарь показывает только YEAR
   c.y0 = D(c.start).getUTCFullYear();
