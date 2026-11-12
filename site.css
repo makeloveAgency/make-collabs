@@ -1,3 +1,8 @@
+@font-face{font-family:"Onest";src:url(fonts/Onest-Light.woff) format("woff");font-weight:300;font-display:swap}
+@font-face{font-family:"Onest";src:url(fonts/Onest-Regular.woff) format("woff");font-weight:400;font-display:swap}
+@font-face{font-family:"Onest";src:url(fonts/Onest-Medium.woff) format("woff");font-weight:500;font-display:swap}
+@font-face{font-family:"Onest";src:url(fonts/Onest-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
+@font-face{font-family:"Fira Mono";src:url(fonts/FiraMono-Medium.woff) format("woff");font-weight:400 600;font-display:swap}
 
 :root{
   --bg:#FFFFFF; --ink:#1D1D1D; --mute:rgba(29,29,29,.62); --faint:rgba(29,29,29,.40);
@@ -7,7 +12,7 @@
   --btn-bg:#1D1D1D; --btn-fg:#FFFFFF;
   --outline:#8CF0B4; --topbar:rgba(255,255,255,.84);
   --display:"Onest","Helvetica Neue",Arial,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --mono:"IBM Plex Mono","Fira Mono",ui-monospace,Menlo,monospace;
   --ease:cubic-bezier(.2,.7,.1,1);
   color-scheme:light;
 }

@@ -6,9 +6,8 @@
 <title>makelove × вы — коллаборации 2027</title>
 <meta name="description" content="коллаборации makelove на 2027 год: календарь проектов и заявка для брендов-работодателей">
 <link rel="icon" type="image/png" href="img/hammer_mask.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="hero.css">
 </head>
@@ -130,7 +129,7 @@ $("#contacts").innerHTML = CONTACTS.map(([k,v]) => `<div><span>${esc(k)}</span><
 /* cards */
 $("#list").innerHTML = COLLABS.map(c => {
   const ph = c.img
-    ? `<div class="lc-ph"><img src="${c.img}" alt="" loading="lazy"></div>`
+    ? `<div class="lc-ph"><img src="${c.img}" alt="" loading="lazy" decoding="async"></div>`
     : `<div class="lc-ph empty" style="--acc:${c.acc};--acc-bg:color-mix(in srgb, ${c.acc} 24%, var(--surface))"><div class="hm" aria-hidden="true"></div><span>фото скоро</span></div>`;
   return `
   <a class="lc${c.locked ? " locked" : ""}" ${c.locked ? 'aria-disabled="true" tabindex="-1"' : `href="${pageUrl(c)}"`} data-c="${c.id}" data-open="${c.id}">${c.locked ? '<span class="lock-note">скоро анонсируем</span>' : ""}

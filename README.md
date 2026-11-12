@@ -10,7 +10,7 @@
   - `SHOW_PRICES` — включает цены
   - `SITE_URL` — адрес сайта: на него ведут кнопка «Принять участие» и QR в PDF
 - `pdf/<id>.pdf` — готовые OnePager (пересобираются после смены `SITE_URL` или текстов)
-- `fonts/` — Articulat CF (лицензия makelove), `img/` — фото и логотипы
+- `fonts/` — Articulat CF (лицензия makelove), Onest и Fira Mono (OFL, подмножество кириллица+латиница) — всё с сайта, без Google Fonts; `img/` — фото и логотипы
 
 ## GitHub Pages
 Залить содержимое папки в корень репозитория → Settings → Pages → Deploy from branch (`main`, `/root`).
