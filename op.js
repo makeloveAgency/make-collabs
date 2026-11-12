@@ -17,16 +17,16 @@ function renderOnePager(c){
   return `
   <div class="op" style="${style}">
     <div class="abs op-head">
-      <div class="op-top"><span class="m">коллаборация / ${esc(monthsLabel(c))} ${year}</span><a class="op-cta" href="${url}">Принять участие →</a></div>
+      <div class="op-top"><span class="m">коллаборация / ${esc(o.month || monthsLabel(c))} ${year}</span><a class="op-cta" href="${url}">Принять участие →</a></div>
       <h1 class="op-title">${esc(qt(c))}</h1>
       <p class="op-sub">${esc(cap(c.sub))}</p>
       <i class="op-vr"></i>
-      <div class="op-meta"><div><span class="m">когда</span><b>${period(c)}</b></div><div><span class="m">формат</span><b>${esc(cap(c.format))}</b></div></div>
+      <div class="op-meta"><div><span class="m">когда</span><b>${esc(o.when || period(c))}</b></div><div><span class="m">формат</span><b>${esc(cap(c.format))}</b></div></div>
       ${price}
     </div>
     <div class="abs op-story">
       <div class="op-ph"><img src="${o.photo || c.img}" alt=""></div>
-      <div class="op-ctx"><span class="m">контекст</span><p>${esc(o.context)}</p></div>
+      <div class="op-ctx${o.context.length > 200 ? " long" : ""}"><span class="m">контекст</span><p>${esc(o.context)}</p></div>
     </div>
     <div class="abs op-ip">
       <div class="op-col op-c1"><span class="m">${esc(o.idea.label || "идея")}</span><h4>${esc(o.idea.h)}</h4><p>${esc(o.idea.text)}</p></div>
