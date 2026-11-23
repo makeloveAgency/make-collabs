@@ -72,7 +72,7 @@ body.v3 .logo-l{display:none} body.v3 .logo-d{display:block}
 .stats{display:none}
 /* v2/v3: big poster hero with numbers */
 body:not(.v1) .hero .wrap{grid-template-columns:1fr;padding-block:clamp(40px,6vw,96px) clamp(28px,3.6vw,48px)}
-body:not(.v1) .hero h1{font-size:clamp(64px,13.5vw,212px);letter-spacing:-.07em}
+body:not(.v1) .hero h1{font-size:clamp(38px,9.4vw,150px);letter-spacing:-.07em}
 body:not(.v1) .hero-side{grid-template-columns:1fr;gap:24px}
 @media (min-width:900px){body:not(.v1) .hero-side{grid-template-columns:minmax(0,1fr) auto;align-items:end}}
 body:not(.v1) .stats{display:flex;gap:clamp(20px,3vw,48px)}

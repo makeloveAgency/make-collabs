@@ -18,15 +18,16 @@
 .crumbs a{font-size:14px;color:var(--mute);text-decoration:none}
 .crumbs a:hover{color:var(--ink)}
 .k-title{font-size:clamp(52px,9vw,148px);letter-spacing:-.065em;line-height:.88}
-.k-sub{font-size:clamp(18px,1.8vw,24px);color:var(--kacc);letter-spacing:-.01em;margin-top:-6px}
+.k-sub{font-size:clamp(18px,1.8vw,24px);color:var(--kacc);letter-spacing:-.01em;line-height:1.3;margin:0}
 .k-row{display:grid;gap:24px;align-items:end}
-@media (min-width:980px){.k-row{grid-template-columns:minmax(0,1fr) auto}}
+@media (min-width:980px){.k-row{grid-template-columns:minmax(0,1fr) auto;align-items:stretch}}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
-.facts div{padding:14px 18px 14px 0;display:grid;gap:3px}
+.facts div{padding:14px 18px 14px 0;display:grid;gap:3px;align-content:start}
 .facts div+div{padding-left:18px;border-left:1px solid var(--line-2)}
 .facts b{font-weight:400;font-size:18px;letter-spacing:-.01em;line-height:1.25}
 @media (max-width:620px){.facts div+div{border-left:0;padding-left:0;border-top:1px solid var(--line-2)}}
-.acts{display:flex;flex-wrap:wrap;gap:10px}
+.acts{display:flex;flex-direction:column;justify-content:space-between;gap:10px}
+.acts .btn{justify-content:center;text-align:center}
 .btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-2)}
 .btn-ghost:hover{box-shadow:inset 0 0 0 1px var(--ink);background:transparent;color:var(--ink)}
 .btn[aria-disabled=true]{opacity:.45;pointer-events:none}
@@ -51,6 +52,10 @@
 .blk h3{font-size:clamp(30px,3.4vw,48px);letter-spacing:-.045em;line-height:1;text-transform:none}
 .blk p{font-size:18px;line-height:1.6;color:color-mix(in srgb,var(--ink) 86%,transparent);max-width:64ch}
 .blk .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--kacc)}
+.mood{margin:8px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mood img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:16px;background:var(--surface)}
+.mood figcaption{grid-column:1/-1;color:var(--faint);font-size:12px}
+@media (max-width:620px){.mood{grid-template-columns:1fr 1fr}}
 .quote{border-left:3px solid var(--kacc);padding:6px 0 6px 22px;font-size:clamp(20px,2vw,26px);line-height:1.35;letter-spacing:-.02em;max-width:40ch}
 .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .kpi div{border:1px solid var(--line-2);border-radius:20px;padding:22px;display:grid;gap:6px;background:var(--card-bg)}
@@ -84,8 +89,8 @@
   <div class="wrap">
     <a href="index.html" aria-label="makelove"><img class="logo logo-l" src="img/wordmark_dark.png" alt="makelove"><img class="logo logo-d" src="img/wordmark.png" alt="makelove"></a>
     <nav class="nav">
-      <a href="index.html#kollaby">коллаборации</a>
       <a href="index.html#kalendar">календарь</a>
+      <a href="index.html#kollaby">коллаборации</a>
       <a class="btn" href="index.html#zayavka" data-apply>оставить заявку</a>
     </nav>
   </div>
@@ -115,8 +120,8 @@ function render(){
   const keyLine = c.keyNote ? `${c.keyNote}` : (c.keys && c.keys.length ? "отмечены в календаре" : "—");
 
   const sections = P ? [
-    ...P.sections.map((s,n) => ({ id:`s${n}`, h:s.h, html:`<div class="blk" id="s${n}"><span class="eyebrow">${esc(s.h)}</span><h3>${esc(s.title)}</h3>${s.p.map(p => `<p>${esc(p)}</p>`).join("")}${s.quote ? `<p class="quote">${esc(s.quote)}</p>` : ""}</div>` })),
-    P.kpi && { id:"kpi", h:"результаты", html:`<div class="blk" id="kpi"><span class="eyebrow">результаты</span><h3>Что будет на выходе</h3><div class="kpi">${P.kpi.map(([n,t]) => `<div><b>${esc(n)}</b><span>${esc(t)}</span></div>`).join("")}</div></div>` },
+    ...P.sections.map((s,n) => ({ id:`s${n}`, h:s.h, html:`<div class="blk" id="s${n}">${s.big ? `<h3>${esc(s.h[0].toUpperCase() + s.h.slice(1))}</h3>` : `<span class="eyebrow">${esc(s.h)}</span>${s.title ? `<h3>${esc(s.title)}</h3>` : ""}`}${s.p.map(p => `<p>${esc(p)}</p>`).join("")}${s.quote ? `<p class="quote">${esc(s.quote)}</p>` : ""}${s.mood ? `<figure class="mood">${s.mood.map(m => `<img src="${m}" alt="" loading="lazy">`).join("")}${s.moodNote ? `<figcaption class="mono">${esc(s.moodNote)}</figcaption>` : ""}</figure>` : ""}</div>` })),
+    P.kpi && { id:"kpi", h:"результат", html:`<div class="blk" id="kpi"><span class="eyebrow">результат</span><h3>Результат</h3><div class="kpi">${P.kpi.map(([n,t]) => `<div><b>${esc(n)}</b><span>${esc(t)}</span></div>`).join("")}</div></div>` },
     { id:"gets", h:"что получает партнёр", html:`<div class="blk" id="gets"><span class="eyebrow">что получает партнёр</span><h3>Что вы получаете</h3><ul class="gets">${P.gets.map((g,n) => `<li><span>0${n+1}</span>${esc(g)}</li>`).join("")}</ul></div>` },
     c.op && { id:"steps", h:"как идёт проект", html:`<div class="blk" id="steps"><span class="eyebrow">как идёт проект</span><h3>Этапы</h3><ol class="steps">${c.op.steps.map((s,n) => `<li><span>0${n+1}</span>${esc(s)}</li>`).join("")}</ol></div>` }
   ].filter(Boolean) : [];
@@ -126,11 +131,12 @@ function render(){
     <div class="hm" aria-hidden="true"></div>
     <div class="wrap">
       <div class="crumbs"><a href="index.html#kollaby">← все коллаборации</a><span class="mono">коллаборация · ${monthsLabel(c)} ${YEAR}${c.status==="draft" ? " · в разработке" : ""}</span></div>
-      <div><h1 class="k-title">${esc(qt(c))}</h1><p class="k-sub" style="margin-top:14px">${esc(c.sub)}</p></div>
+      <div><h1 class="k-title">${esc(qt(c))}</h1><p class="k-sub" style="margin-top:14px">${c.with ? `${esc(c.with)} (${esc(c.sub)})` : esc(c.sub)}</p></div>
       <div class="k-row">
         <div class="facts">
           <div><span class="mono">период</span><b>${periodFull(c)}</b></div>
           <div><span class="mono">формат</span><b>${esc(c.format)}</b></div>
+          ${c.geo ? `<div><span class="mono">география</span><b>${esc(c.geo)}</b></div>` : ""}
           <div><span class="mono">ключевые даты</span><b>${esc(keyLine)}</b></div>
           <div><span class="mono">стоимость</span><b>${priceShown(c) ? esc(c.price.value) + " ₽" : "по запросу"}</b></div>
         </div>
@@ -143,7 +149,6 @@ function render(){
   </section>
 
   <section class="k-op"><div class="wrap">
-    <div class="k-op-head"><span class="mono">onepager · 16:9</span><span class="mono">${pdf ? "кнопка и qr в pdf ведут на эту страницу" : ""}</span></div>
     ${c.op ? `<div class="op-fit">${renderOnePager(c)}</div>` : `<div class="op-empty"><div><b>onepager готовится</b>соберём его из презентации проекта</div></div>`}
   </div></section>
 
@@ -153,7 +158,7 @@ function render(){
       <div class="lr-body">
         <p class="lead">${esc(P.lead)}</p>
         ${sections.map(s => s.html).join("")}
-        <div class="k-cta"><div class="hm" aria-hidden="true"></div><span class="mono">заявка на участие</span><h3>хотите в ${esc(qt(c))}?</h3><p style="color:var(--mute);max-width:44ch">оставьте контакты — пришлём полную презентацию и расскажем, как подключиться.</p><a class="btn" style="justify-self:start" href="index.html#zayavka" data-apply>хочу участвовать →</a></div>
+        <div class="k-cta"><div class="hm" aria-hidden="true"></div><span class="mono">заявка на участие</span><h3>хотите присоединиться к проекту ${esc(qt(c))}?</h3><p style="color:var(--mute);max-width:44ch">оставьте контакты — пришлём полную презентацию и расскажем, как подключиться.</p><a class="btn" style="justify-self:start" href="index.html#zayavka" data-apply>хочу участвовать →</a></div>
       </div>
     </div>` : `<div class="lr"><span class="mono">о проекте</span><div class="lr-body short-only"><p>${esc(c.short)}</p><p style="color:var(--mute);font-size:17px">подробное описание появится здесь, когда будет готова презентация проекта.</p><a class="btn" style="justify-self:start" href="index.html#zayavka" data-apply>хочу участвовать →</a></div></div>`}
 

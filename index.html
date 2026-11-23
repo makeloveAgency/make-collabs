@@ -16,8 +16,8 @@
   <div class="wrap">
     <a href="#top" aria-label="makelove"><img class="logo logo-l" src="img/wordmark_dark.png" alt="makelove"><img class="logo logo-d" src="img/wordmark.png" alt="makelove"></a>
     <nav class="nav">
-      <a href="#kollaby">коллаборации</a>
       <a href="#kalendar">календарь</a>
+      <a href="#kollaby">коллаборации</a>
       <a class="btn" href="#zayavka">оставить заявку</a>
     </nav>
   </div>
@@ -30,28 +30,17 @@
       <div class="hm anim" style="--hc:var(--pink);--s:380px;right:-100px;top:-120px;--o:.26;--rot:18deg;--dx:-40px;--dy:30px;--t:24s"></div>
     </div>
     <div class="wrap">
-      <h1>makelove<span class="x">×</span>вы</h1>
+      <h1 aria-label="makelove × you are"><span class="ln1">makelove</span><span class="ln2"><span class="x">×</span>you are</span></h1>
       <div class="hero-side">
         <div style="display:grid;gap:14px">
-          <span class="tag">коллаборации <span class="yr"></span></span>
-          <p class="lead">коллаборации, в которых несколько брендов-работодателей объединяются вокруг одной идеи. бюджет делится между участниками, а охват складывается.</p>
+          <p class="lead">коллаборация — проект, в котором несколько брендов-работодателей объединяются вокруг одной большой идеи. бюджет делится между участниками, а охват значительно приумножается.</p>
         </div>
         <div class="corner" id="corner"></div>
       </div>
     </div>
   </section>
 
-  <section class="sec" id="kollaby">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2>все коллаборации</h2>
-        <p>идея, сроки и формат участия. нажмите на карточку, чтобы открыть страницу коллаборации и скачать onepager.</p>
-      </div>
-      <div class="lc-grid" id="list"></div>
-    </div>
-  </section>
-
-  <section class="sec" id="kalendar" style="padding-top:0">
+  <section class="sec" id="kalendar">
     <div class="wrap">
       <div class="sec-head">
         <h2>календарь <span class="g yr"></span></h2>
@@ -65,8 +54,17 @@
           <span class="lg-v2"><span><i style="background:var(--green)"></i>период коллаборации</span><span><i style="background:none;box-shadow:inset 0 0 0 2px var(--ink);border-radius:999px;width:22px"></i>ключевые даты</span><span><i style="box-shadow:inset 0 0 0 1.5px var(--faint);border-radius:999px;width:22px"></i>идея в разработке</span></span>
           <span><i style="border:1px dashed var(--line-2);background:repeating-linear-gradient(135deg,transparent 0 3px,var(--line) 3px 4px)"></i>свободный месяц</span>
         </div>
-        <span class="mono">свободный месяц можно занять своей идеей</span>
       </div>
+    </div>
+  </section>
+
+  <section class="sec" id="kollaby" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>все коллаборации</h2>
+        <p>идея, сроки и формат участия. нажмите на карточку, чтобы открыть страницу коллаборации и скачать onepager.</p>
+      </div>
+      <div class="lc-grid" id="list"></div>
     </div>
   </section>
 
@@ -140,7 +138,7 @@ $("#list").innerHTML = COLLABS.map(c => {
       <p class="lc-sub">${esc(c.sub)}</p>
       <p class="lc-short">${esc(c.short)}</p>
       <div class="lc-foot">
-        <div class="per"><small>период · ${esc(c.format)}</small><b>${period(c)}</b><small>${priceSmall(c)}</small></div>
+        <div class="per"><b>${period(c)}</b></div>
         <span class="go" aria-hidden="true">↗</span>
       </div>
     </div>
@@ -247,6 +245,22 @@ $("#corner").innerHTML = `<a class="cn-next" href="${pageUrl(next)}">
   <span class="cn-ph">${next.img ? `<img src="${next.img}" alt="">` : ""}</span>
   <span class="cn-tx"><span class="mono">ближайшая коллаборация</span><b>${esc(qt(next))}</b><small>${period(next)} ${YEAR}</small></span>
   <span class="go" aria-hidden="true">↗</span></a>`;
+/* шапка: карточка — по верху строчных первой строки, текст — по верху строчных второй */
+function xTop(el, sample){
+  const cs = getComputedStyle(el), fs = parseFloat(cs.fontSize), lh = parseFloat(cs.lineHeight) || fs*1.2;
+  const c = alignHero.cv || (alignHero.cv = document.createElement("canvas").getContext("2d"));
+  c.font = `${cs.fontWeight} ${fs}px ${cs.fontFamily}`; const m = c.measureText(sample);
+  const asc = m.fontBoundingBoxAscent, desc = m.fontBoundingBoxDescent;
+  return (lh - asc - desc)/2 + asc - m.actualBoundingBoxAscent;
+}
+function alignHero(){
+  const l1 = $(".hero .ln1"), l2 = $(".hero .ln2"), lead = $(".hero .lead"), cn = $("#corner");
+  if (!l1 || !lead) return;
+  const wide = matchMedia("(min-width:900px)").matches;
+  cn.style.marginTop = wide ? xTop(l1, "v") + "px" : "";
+  lead.parentElement.style.marginTop = wide ? (xTop(l2, "u") - xTop(lead, "u")) + "px" : "";
+}
+alignHero(); document.fonts && document.fonts.ready.then(alignHero); addEventListener("resize", alignHero);
 /* preselect a collab when coming from its page */
 try { const pick = sessionStorage.getItem("pick"); if (pick){ selItem.value = pick; sessionStorage.removeItem("pick"); } } catch(_){}
 </script>

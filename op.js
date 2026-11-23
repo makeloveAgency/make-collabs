@@ -39,7 +39,7 @@ function renderOnePager(c){
     <div class="abs op-steps" style="--n:${o.steps.length}">
       <div class="op-steps-h"><span class="m">как идёт проект</span><i></i><img src="img/wordmark_dark.png" alt="makelove"></div>
       <ol>${o.steps.map((s,i) => `<li><span>0${i+1}</span>${esc(s)}</li>`).join("")}</ol>
-      <span class="op-foot">${esc(CONTACTS[0][1])} · ${esc(url.replace(/^https?:\/\//,""))}</span>
+      <span class="op-foot">${esc(CONTACTS[0][1])}</span>
     </div>
   </div>`;
 }

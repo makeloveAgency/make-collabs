@@ -24,3 +24,17 @@
 .cn-rib:hover .cn-more,.cn-free:hover .cn-more{color:var(--ink)}
 .cn-free .chips{display:flex;flex-wrap:wrap;gap:8px}
 .cn-free .chips span{font-size:22px;letter-spacing:-.03em;border:1px dashed var(--line-2);border-radius:999px;padding:6px 16px}
+
+/* шапка «лесенкой»: makelove слева, × you are справа */
+body:not(.v1) .hero .wrap{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"l1 cn" "ld l2";align-items:start;row-gap:0}
+body:not(.v1) .hero h1{display:contents;animation:none}
+.hero h1 .ln1,.hero h1 .ln2{display:block;white-space:nowrap;font-size:clamp(56px,14.5vw,230px);letter-spacing:-.07em;line-height:.86;animation:rise 1s var(--ease) both}
+.hero h1 .ln1{grid-area:l1;margin-left:-.063em}
+.hero h1 .ln2{grid-area:l2;justify-self:end;animation-delay:.08s}
+body:not(.v1) .hero-side{display:contents}
+.hero-side>div:first-child{grid-area:ld}
+.hero .corner{grid-area:cn;justify-self:end}
+@media (max-width:899px){
+  body:not(.v1) .hero .wrap{grid-template-columns:1fr;grid-template-areas:"l1" "l2" "ld" "cn";row-gap:18px}
+  .hero h1 .ln1,.hero h1 .ln2{font-size:clamp(56px,19vw,150px)}
+}
