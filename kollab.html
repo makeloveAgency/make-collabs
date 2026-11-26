@@ -14,8 +14,8 @@
 <link rel="preload" href="fonts/ArticulatCF-Regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="fonts/ArticulatCF-Medium.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="fonts/FiraMono-Medium.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="site.css?v=20261126b">
-<link rel="stylesheet" href="op.css?v=20261126b">
+<link rel="stylesheet" href="site.css?v=20261126c">
+<link rel="stylesheet" href="op.css?v=20261126c">
 <style>
 /* ===== шапка коллабы ===== */
 .k-top{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
@@ -112,13 +112,15 @@
   </div>
 </footer>
 
-<script src="data.js?v=20261126b"></script>
-<script src="op.js?v=20261126b"></script>
+<script src="data.js?v=20261126c"></script>
+<script src="op.js?v=20261126c"></script>
 <script>
 const PDF_READY = ["utrennik","blin"];                       // для каких коллаб уже выгружен pdf/<id>.pdf
 function render(){
   const id = location.hash.slice(1);
-  const i = Math.max(0, OPEN.findIndex(x => x.id === id)), c = OPEN[i];
+  const found = OPEN.findIndex(x => x.id === id);
+  if (found < 0) { location.replace("index.html#kollaby"); return; }   // нет такой открытой коллабы — на список, а не на чужую страницу
+  const i = found, c = OPEN[i];
   const prev = OPEN[(i - 1 + OPEN.length) % OPEN.length], next = OPEN[(i + 1) % OPEN.length];
   document.title = `${qt(c)} — makelove × вы`;
   document.body.style.setProperty("--kacc", c.acc);

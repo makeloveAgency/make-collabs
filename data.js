@@ -7,7 +7,7 @@
    theme — цвета onepager: lab (подписи), acc (акцент ₽/номера), box (плашка), glow (свечение фона).
    ============================================================ */
 const YEAR = 2027;
-const VER = "20261126b";   // версия файлов: меняется при каждом обновлении, чтобы браузер не показывал старое
+const VER = "20261126c";   // версия файлов: меняется при каждом обновлении, чтобы браузер не показывал старое
 const SHOW_PRICES = false;
 const SITE_URL = "https://makeloveagency.github.io/make-collabs";
 const FORM_EMAIL = "info@makeloveagency.ru";   // заявки с формы приходят сюда (через formsubmit.co)
