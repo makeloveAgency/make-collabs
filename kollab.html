@@ -130,7 +130,7 @@ function render(){
   const sections = P ? [
     ...P.sections.map((s,n) => ({ id:`s${n}`, h:s.h, html:`<div class="blk" id="s${n}">${H(s.h)}${s.p.map(p => `<p>${esc(p)}</p>`).join("")}${s.quote ? `<p class="quote">${esc(s.quote)}</p>` : ""}${s.mood ? `<figure class="mood">${s.mood.map(m => `<img src="${m}" alt="" loading="lazy">`).join("")}${s.moodNote ? `<figcaption class="mono">${esc(s.moodNote)}</figcaption>` : ""}</figure>` : ""}</div>` })),
     P.kpi && { id:"kpi", h:"результат", html:`<div class="blk" id="kpi">${H("результат")}<div class="kpi">${P.kpi.map(([n,t]) => `<div><b>${esc(n)}</b><span>${esc(t)}</span></div>`).join("")}</div></div>` },
-    { id:"gets", h:"что получает партнёр", html:`<div class="blk" id="gets">${H("что получает партнёр")}<ul class="gets">${P.gets.map((g,n) => `<li><span>0${n+1}</span>${esc(g)}</li>`).join("")}</ul></div>` },
+    { id:"gets", h:"что получает партнёр", html:`<div class="blk" id="gets">${H("что получает партнёр")}<ul class="gets">${(c.op ? c.op.gets : P.gets).map((g,n) => `<li><span>0${n+1}</span>${esc(g)}</li>`).join("")}</ul></div>` },
     c.op && { id:"steps", h:"как идёт проект", html:`<div class="blk" id="steps">${H("как идёт проект")}<ol class="steps">${c.op.steps.map((s,n) => `<li><span>0${n+1}</span>${esc(s)}</li>`).join("")}</ol></div>` }
   ].filter(Boolean) : [];
 
