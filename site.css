@@ -1,8 +1,12 @@
-@font-face{font-family:"Onest";src:url(fonts/Onest-Light.woff) format("woff");font-weight:300;font-display:swap}
-@font-face{font-family:"Onest";src:url(fonts/Onest-Regular.woff) format("woff");font-weight:400;font-display:swap}
-@font-face{font-family:"Onest";src:url(fonts/Onest-Medium.woff) format("woff");font-weight:500;font-display:swap}
-@font-face{font-family:"Onest";src:url(fonts/Onest-SemiBold.woff) format("woff");font-weight:600;font-display:swap}
-@font-face{font-family:"Fira Mono";src:url(fonts/FiraMono-Medium.woff) format("woff");font-weight:400 600;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-400-cyr.woff2) format("woff2");font-weight:400;font-display:block;unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-400-lat.woff2) format("woff2");font-weight:400;font-display:block;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+20BD,U+2122,U+2190-2199,U+2212,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-500-cyr.woff2) format("woff2");font-weight:500;font-display:block;unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-500-lat.woff2) format("woff2");font-weight:500;font-display:block;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+20BD,U+2122,U+2190-2199,U+2212,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest";src:url(fonts/Onest-Light.woff) format("woff");font-weight:300;font-display:block}
+@font-face{font-family:"Onest";src:url(fonts/Onest-Regular.woff) format("woff");font-weight:400;font-display:block}
+@font-face{font-family:"Onest";src:url(fonts/Onest-Medium.woff) format("woff");font-weight:500;font-display:block}
+@font-face{font-family:"Onest";src:url(fonts/Onest-SemiBold.woff) format("woff");font-weight:600;font-display:block}
+@font-face{font-family:"Fira Mono";src:url(fonts/FiraMono-Medium.woff) format("woff");font-weight:400 600;font-display:block}
 
 :root{
   --bg:#FFFFFF; --ink:#1D1D1D; --mute:rgba(29,29,29,.62); --faint:rgba(29,29,29,.40);

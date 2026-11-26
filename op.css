@@ -1,7 +1,7 @@
-@font-face{font-family:"Fira Mono";src:url(fonts/FiraMono-Medium.woff) format("woff");font-weight:400 600;font-display:swap}
-@font-face{font-family:"Articulat CF";src:url(fonts/ArticulatCF-Light.woff) format("woff");font-weight:300;font-display:swap}
-@font-face{font-family:"Articulat CF";src:url(fonts/ArticulatCF-Regular.woff) format("woff");font-weight:400;font-display:swap}
-@font-face{font-family:"Articulat CF";src:url(fonts/ArticulatCF-Medium.woff) format("woff");font-weight:500;font-display:swap}
+@font-face{font-family:"Fira Mono";src:url(fonts/FiraMono-Medium.woff) format("woff");font-weight:400 600;font-display:block}
+@font-face{font-family:"Articulat CF";src:url(fonts/ArticulatCF-Light.woff) format("woff");font-weight:300;font-display:block}
+@font-face{font-family:"Articulat CF";src:url(fonts/ArticulatCF-Regular.woff) format("woff");font-weight:400;font-display:block}
+@font-face{font-family:"Articulat CF";src:url(fonts/ArticulatCF-Medium.woff) format("woff");font-weight:500;font-display:block}
 /* OnePager 16:9 — 1920×1080, по макету Figma «one pager 16:9». Масштабируется контейнером .op-fit */
 .op{--lab:#7B5414;--acc:#FDB363;--box:#F2EBDD;--glow:#FFF1DE;--line:#CCC4B8;--ink:#272420;
   position:relative;width:1920px;height:1080px;overflow:hidden;background:#F7FBF6;color:var(--ink);

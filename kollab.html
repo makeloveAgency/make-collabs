@@ -5,8 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>коллаборация — makelove × вы</title>
 <link rel="icon" type="image/png" href="img/hammer_mask.png">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<link rel="preload" href="fonts/Onest-Light.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/Onest-Regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/Onest-Medium.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/IBMPlexMono-400-cyr.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/IBMPlexMono-500-cyr.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ArticulatCF-Light.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/ArticulatCF-Regular.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/ArticulatCF-Medium.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="fonts/FiraMono-Medium.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="op.css">
 <style>
@@ -119,11 +126,12 @@ function render(){
   const P = c.page;
   const keyLine = c.keyNote ? `${c.keyNote}` : (c.keys && c.keys.length ? "отмечены в календаре" : "—");
 
+  const H = t => `<h3>${esc(t[0].toUpperCase() + t.slice(1))}</h3>`;   // заголовок секции = пункт бокового меню
   const sections = P ? [
-    ...P.sections.map((s,n) => ({ id:`s${n}`, h:s.h, html:`<div class="blk" id="s${n}">${s.big ? `<h3>${esc(s.h[0].toUpperCase() + s.h.slice(1))}</h3>` : `<span class="eyebrow">${esc(s.h)}</span>${s.title ? `<h3>${esc(s.title)}</h3>` : ""}`}${s.p.map(p => `<p>${esc(p)}</p>`).join("")}${s.quote ? `<p class="quote">${esc(s.quote)}</p>` : ""}${s.mood ? `<figure class="mood">${s.mood.map(m => `<img src="${m}" alt="" loading="lazy">`).join("")}${s.moodNote ? `<figcaption class="mono">${esc(s.moodNote)}</figcaption>` : ""}</figure>` : ""}</div>` })),
-    P.kpi && { id:"kpi", h:"результат", html:`<div class="blk" id="kpi"><span class="eyebrow">результат</span><h3>Результат</h3><div class="kpi">${P.kpi.map(([n,t]) => `<div><b>${esc(n)}</b><span>${esc(t)}</span></div>`).join("")}</div></div>` },
-    { id:"gets", h:"что получает партнёр", html:`<div class="blk" id="gets"><span class="eyebrow">что получает партнёр</span><h3>Что вы получаете</h3><ul class="gets">${P.gets.map((g,n) => `<li><span>0${n+1}</span>${esc(g)}</li>`).join("")}</ul></div>` },
-    c.op && { id:"steps", h:"как идёт проект", html:`<div class="blk" id="steps"><span class="eyebrow">как идёт проект</span><h3>Этапы</h3><ol class="steps">${c.op.steps.map((s,n) => `<li><span>0${n+1}</span>${esc(s)}</li>`).join("")}</ol></div>` }
+    ...P.sections.map((s,n) => ({ id:`s${n}`, h:s.h, html:`<div class="blk" id="s${n}">${H(s.h)}${s.p.map(p => `<p>${esc(p)}</p>`).join("")}${s.quote ? `<p class="quote">${esc(s.quote)}</p>` : ""}${s.mood ? `<figure class="mood">${s.mood.map(m => `<img src="${m}" alt="" loading="lazy">`).join("")}${s.moodNote ? `<figcaption class="mono">${esc(s.moodNote)}</figcaption>` : ""}</figure>` : ""}</div>` })),
+    P.kpi && { id:"kpi", h:"результат", html:`<div class="blk" id="kpi">${H("результат")}<div class="kpi">${P.kpi.map(([n,t]) => `<div><b>${esc(n)}</b><span>${esc(t)}</span></div>`).join("")}</div></div>` },
+    { id:"gets", h:"что получает партнёр", html:`<div class="blk" id="gets">${H("что получает партнёр")}<ul class="gets">${P.gets.map((g,n) => `<li><span>0${n+1}</span>${esc(g)}</li>`).join("")}</ul></div>` },
+    c.op && { id:"steps", h:"как идёт проект", html:`<div class="blk" id="steps">${H("как идёт проект")}<ol class="steps">${c.op.steps.map((s,n) => `<li><span>0${n+1}</span>${esc(s)}</li>`).join("")}</ol></div>` }
   ].filter(Boolean) : [];
 
   $("#page").innerHTML = `
@@ -158,7 +166,7 @@ function render(){
       <div class="lr-body">
         <p class="lead">${esc(P.lead)}</p>
         ${sections.map(s => s.html).join("")}
-        <div class="k-cta"><div class="hm" aria-hidden="true"></div><span class="mono">заявка на участие</span><h3>хотите присоединиться к проекту ${esc(qt(c))}?</h3><p style="color:var(--mute);max-width:44ch">оставьте контакты — пришлём полную презентацию и расскажем, как подключиться.</p><a class="btn" style="justify-self:start" href="index.html#zayavka" data-apply>хочу участвовать →</a></div>
+        <div class="k-cta"><div class="hm" aria-hidden="true"></div><h3>хотите присоединиться к проекту ${esc(qt(c))}?</h3><p style="color:var(--mute);max-width:44ch">оставьте контакты — пришлём полную презентацию и расскажем, как подключиться.</p><a class="btn" style="justify-self:start" href="index.html#zayavka" data-apply>хочу участвовать →</a></div>
       </div>
     </div>` : `<div class="lr"><span class="mono">о проекте</span><div class="lr-body short-only"><p>${esc(c.short)}</p><p style="color:var(--mute);font-size:17px">подробное описание появится здесь, когда будет готова презентация проекта.</p><a class="btn" style="justify-self:start" href="index.html#zayavka" data-apply>хочу участвовать →</a></div></div>`}
 

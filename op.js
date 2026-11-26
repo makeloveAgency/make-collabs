@@ -19,7 +19,7 @@ function renderOnePager(c){
     <div class="abs op-head">
       <div class="op-top"><span class="m">коллаборация / ${esc(o.month || monthsLabel(c))} ${year}</span><a class="op-cta" href="${url}">Принять участие →</a></div>
       <h1 class="op-title">${esc(qt(c))}</h1>
-      <p class="op-sub">${esc(cap(c.sub))}</p>
+      <p class="op-sub">${esc(cap(o.sub || c.sub))}</p>
       <i class="op-vr"></i>
       <div class="op-meta"><div><span class="m">когда</span><b>${esc(o.when || period(c))}</b></div><div><span class="m">формат</span><b>${esc(cap(c.format))}</b></div></div>
       ${price}
